@@ -42,12 +42,29 @@ export const fetchDataByTag = async (tag) =>
 }
 
 
-export const uploadData = async (data) => {
+export const uploadNewData = async (data) => {
   await initAWS();
 
   data.id = uuidv4();
   data.CreationDate = new Date().toISOString();
   data.CreationDatePK = "dish";
+
+  const params = {
+    TableName: 'Recepies',
+    Item: data,
+  };
+
+  try {
+    await dynamodb.put(params).promise();
+    console.log('Recepie uploaded successfully:', data);
+  } catch (error) {
+    console.error('Error uploading dish:', data);
+    throw error;
+  }
+};
+
+export const uploadData = async (data) => {
+  await initAWS();
 
   const params = {
     TableName: 'Recepies',
