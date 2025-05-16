@@ -31,7 +31,8 @@ const AddDishButton = ({ onClickedAndChanged }) => {
   };
 
   return (
-    <div style={{ marginTop: '1rem' }}>
+    <div>
+      <div style={{ padding: '1rem' }}>
       <input
         type="text"
         placeholder="Paste recipe URL here"
@@ -42,6 +43,7 @@ const AddDishButton = ({ onClickedAndChanged }) => {
       <button onClick={handleExtractAndUpload} disabled={loading || !url.trim()} style={{ marginLeft: '0.5rem' }}>
         {loading ? 'Uploading...' : 'Upload Recipe'}
       </button>
+    </div>
     </div>
   );
 };
