@@ -1,6 +1,6 @@
 {
-  "homepage": "http://kiskovi97.github.io/CookBook",
-  "name": "CookBook",
+  "homepage": "http://kiskovi97.github.io/CookBookAdmin",
+  "name": "CookBookAdmin",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
