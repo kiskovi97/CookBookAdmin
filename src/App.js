@@ -6,7 +6,6 @@ import Navbar from './Navbar';
 import Dishes from './pages/Dishes.jsx';
 import DBDishes from './pages/DBDishes.jsx';
 import DBDish from './pages/DBDish.jsx';
-import Testing from './pages/Testing.jsx';
 import ReactGa from 'react-ga';
 import { useEffect } from 'react';
 
@@ -33,7 +32,6 @@ function App() {
         <Route exact path="/dishes" element={<Dishes tag="main"/>} />
         <Route exact path="/dbdishes" element={<DBDishes/>} />
         <Route exact path="/dbdish/*" element={<DBDish/>} />
-        <Route exact path="/test" element={<Testing/>} />
         <Route component={Error} />
       </Routes>
     </main>
