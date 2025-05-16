@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/CookBookAdmin/static/css/main.bae1393b.css",
-    "main.js": "/CookBookAdmin/static/js/main.f25a4684.js",
+    "main.js": "/CookBookAdmin/static/js/main.ead26826.js",
     "static/js/488.4c51e530.chunk.js": "/CookBookAdmin/static/js/488.4c51e530.chunk.js",
     "static/media/foodTemplate.webp": "/CookBookAdmin/static/media/foodTemplate.ce8eca3c492c031ebe56.webp",
     "static/media/OpenSauceOne-Regular.woff": "/CookBookAdmin/static/media/OpenSauceOne-Regular.942cf14415c3f888536c.woff",
@@ -9,11 +9,11 @@
     "static/media/github.svg": "/CookBookAdmin/static/media/github.237cbb85b0ab3f1af1fc131e57429d91.svg",
     "index.html": "/CookBookAdmin/index.html",
     "main.bae1393b.css.map": "/CookBookAdmin/static/css/main.bae1393b.css.map",
-    "main.f25a4684.js.map": "/CookBookAdmin/static/js/main.f25a4684.js.map",
+    "main.ead26826.js.map": "/CookBookAdmin/static/js/main.ead26826.js.map",
     "488.4c51e530.chunk.js.map": "/CookBookAdmin/static/js/488.4c51e530.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bae1393b.css",
-    "static/js/main.f25a4684.js"
+    "static/js/main.ead26826.js"
   ]
 }
