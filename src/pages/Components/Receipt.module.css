@@ -65,19 +65,13 @@
     display: grid;
     column-gap: 2em;
     grid-template-columns: 1fr 1fr;
-    padding-left: 1em;
-    padding-right: 1em;
     text-align: justify;
-}
-
-.description li, .description ol  {
-    margin-bottom: 0.5em;
 }
 
 .receipt .description > div {
     background-color: white;
     border-radius: 1em;
-    padding: 2em;
+    padding: 1em;
     margin-top: 2em;
     height: max-content;
     filter: drop-shadow(0px 5px 5px rgba(34, 34, 34, 0.11));

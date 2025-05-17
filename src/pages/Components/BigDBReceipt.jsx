@@ -1,4 +1,5 @@
 import styles from './Receipt.module.css'
+import inputStyles from './Input.module.css'
 import ScrollAnimation from 'react-animate-on-scroll'
 import { useState, useEffect } from 'react';
 import { uploadData } from '../../dynamoService.js';
@@ -25,23 +26,25 @@ function BigDBReceipt({ proj }) {
             <div className={styles.receipt}>
                 <div className={styles.main}>
                     <div className={styles.details}>
-                        <input className={styles.title}
-                            type="text"
-                            name='title'
-                            placeholder="Paste recipe URL here"
-                            value={allValues.title}
-                            defaultValue={allValues.title}
-                            onChange={handleChange}
-                            style={{ padding: '0.5rem', width: '60%' }}
-                        />
-                        <textarea className={styles.title} rows="8" cols="80"
-                            name='details'
-                            placeholder="Paste recipe URL here"
-                            value={allValues.details}
-                            defaultValue={allValues.details}
-                            onChange={handleChange}
-                            style={{ padding: '0.5rem', width: '60%' }}
-                        />
+                        <div className={styles.title}>
+                            <input className={inputStyles.text}
+                                type="text"
+                                name='title'
+                                placeholder="Paste recipe URL here"
+                                value={allValues.title}
+                                defaultValue={allValues.title}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div>
+                            <textarea className={inputStyles.textarea}
+                                name='details'
+                                placeholder="Paste recipe URL here"
+                                value={allValues.details}
+                                defaultValue={allValues.details}
+                                onChange={handleChange}
+                            />
+                        </div>
                         {proj.sources && proj.sources.length > 0 ? (<div>Források:</div>) : null}
                         {proj.sources?.map(source => (
                             <div>
@@ -66,7 +69,7 @@ function BigDBReceipt({ proj }) {
                 </div>
                 <div  className={styles.description}>
                     <div>
-                        <button className={styles.button} onClick={upload}>Upload</button>
+                        <button className={inputStyles.button} onClick={upload}>Upload</button>
                     </div>
                 </div>
             </div>)

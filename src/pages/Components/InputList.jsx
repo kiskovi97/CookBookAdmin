@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import styles from './Receipt.module.css'
+import inputStyles from './Input.module.css'
 
 const InputList = ({ onChanged, name, defaultState }) => {
     const [list, setList] = useState(defaultState);
@@ -49,10 +49,10 @@ const InputList = ({ onChanged, name, defaultState }) => {
         }, [defaultState]);
 
     return(
-        <div>
+        <div className={inputStyles.section}>
             {list?.map((value, index) => (
-                <li>
-                        <textarea className={styles.title} rows="8" cols="80"
+                <li className={inputStyles.section}>
+                        <textarea className={inputStyles.textarea} rows="8" cols="80"
                             name={index}
                             placeholder="Paste recipe URL here"
                             value={value}
@@ -60,10 +60,10 @@ const InputList = ({ onChanged, name, defaultState }) => {
                             onChange={handleChange}
                             style={{ padding: '0.5rem', width: '60%' }}
                         />
-                <button className={styles.button} onClick={() => removeInstruction(index)}>Remove</button>
+                    <button className={inputStyles.button} onClick={() => removeInstruction(index)}>Remove</button>
                 </li>
                 ))}
-                <button className={styles.button} onClick={addInstruction}>Add Instruction</button>
+                <button className={inputStyles.button} onClick={addInstruction}>Add Instruction</button>
         </div>)
 }
 
