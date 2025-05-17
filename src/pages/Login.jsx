@@ -13,7 +13,7 @@ function Login() {
       }
     } catch (error) {
       console.error("Google Sign-In Error:", error);
-      alert("YGoogle Sign-In Error");
+      alert("Google Sign-In Error");
     }
   };
 
