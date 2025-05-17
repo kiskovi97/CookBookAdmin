@@ -3,13 +3,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCb0n9GKcP7LtPXNHmSNIG1cYaiR9x0uR0",
-  authDomain: "cookbookadmin-5cadc.firebaseapp.com",
-  projectId: "cookbookadmin-5cadc",
-  storageBucket: "cookbookadmin-5cadc.firebasestorage.app",
-  messagingSenderId: "382342210925",
-  appId: "1:382342210925:web:c58c6582eefb5c33426664",
-  measurementId: "G-BRPH3LFLZ0"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: "cook-book-admin.firebaseapp.com",
+  projectId: "cook-book-admin",
+  storageBucket: "cook-book-admin.firebasestorage.app",
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGIN_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: "G-S9P5S4GTBD"
 };
 
 const app = initializeApp(firebaseConfig);
