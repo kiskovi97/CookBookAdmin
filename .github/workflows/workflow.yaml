@@ -28,6 +28,10 @@ jobs:
       run: |
         npm install
         npm run build
+      env:
+        FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+        FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+        FIREBASE_MESSAGIN_SENDER_ID: ${{ secrets.FIREBASE_MESSAGIN_SENDER_ID }}
 
     - name: Deploy
       run: |
