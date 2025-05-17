@@ -2,6 +2,8 @@ import styles from './Receipt.module.css'
 import ScrollAnimation from 'react-animate-on-scroll'
 import { useState, useEffect } from 'react';
 import { uploadData } from '../../dynamoService.js';
+import InputList from './InputList.jsx';
+import InputListList from './InputListList.jsx';
 
 function BigDBReceipt({ proj }) {
     const [allValues, setAllValues] = useState(proj);
@@ -45,9 +47,6 @@ function BigDBReceipt({ proj }) {
                             <div>
                                 <a href={source.link} target="_blank" rel="noreferrer">{source.name}</a>
                             </div>))}
-                        <div>
-                            <button className={styles.button} onClick={upload}>Upload</button>
-                        </div>
 
                     </div>
                     <div className={styles.image}>
@@ -56,20 +55,19 @@ function BigDBReceipt({ proj }) {
                 </div>
                 <div className={styles.description}>
                     <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutLeft" animateOnce >
-                        {proj.ingredients?.map(station => (
-                            <div>
-                                <h3>{station.title}</h3>
-                                <div>
-                                    {station.list?.map(element => (<li>{element}</li>))}
-                                </div>
-                            </div>))}
+                        <InputListList name="ingredients" onChanged={handleChange} defaultState={proj.ingredients}/>
                     </ScrollAnimation>
                     <ScrollAnimation animateIn="fadeInRight" animateOut="fadeOutRight" animateOnce >
                         <div>
                             {proj.comment ? (<li>{proj.comment}</li>) : null}
-                            {proj.instructions?.map(station => (<li>{station}</li>))}
+                            <InputList name="instructions" onChanged={handleChange} defaultState={proj.instructions}/>
                         </div>
                     </ScrollAnimation>
+                </div>
+                <div  className={styles.description}>
+                    <div>
+                        <button className={styles.button} onClick={upload}>Upload</button>
+                    </div>
                 </div>
             </div>)
 

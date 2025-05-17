@@ -8,6 +8,8 @@ import DBDish from './pages/DBDish.jsx';
 import Upload from './pages/Upload.jsx';
 import ReactGa from 'react-ga';
 import { useEffect } from 'react';
+import { useAuth } from "./AuthContext";
+import Login from './pages/Login.jsx';
 
 function usePageViews() {
     let location = useLocation();
@@ -22,17 +24,31 @@ function usePageViews() {
 }
 
 function App() {
+
+  const { user, loading } = useAuth();
+
   usePageViews();
+
+  if (loading) return <main className="App"><p>Loading...</p></main>;
+  if (!user)
+  {
+    return (
+      <main className="App">
+        <Login />
+      </main>
+    );
+  }
+
   return (
     <main className="App">
-      <Navbar />
-      <Routes>
-        <Route exact path="/" element={<Home/>}  />
-        <Route exact path="/dbdishes" element={<DBDishes/>} />
-        <Route exact path="/dbdish/*" element={<DBDish/>} />
-        <Route exact path="/upload" element={<Upload/>} />
-        <Route component={Error} />
-      </Routes>
+        <Navbar />
+        <Routes>
+          <Route exact path="/" element={<Home/>}  />
+          <Route exact path="/dbdishes" element={<DBDishes/>} />
+          <Route exact path="/dbdish/*" element={<DBDish/>} />
+          <Route exact path="/upload" element={<Upload/>} />
+          <Route component={Error} />
+        </Routes>
     </main>
   );
 }
