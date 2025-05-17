@@ -7,7 +7,7 @@ const firebaseConfig = {
   authDomain: "cook-book-admin.firebaseapp.com",
   projectId: "cook-book-admin",
   storageBucket: "cook-book-admin.firebasestorage.app",
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGIN_SENDER_ID,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: "G-S9P5S4GTBD"
 };
