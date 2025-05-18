@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import InputList from './InputList';
 import inputStyles from './Input.module.css'
+import deleteIcon from '../../logos/bin.png';
 
 const InputListList = ({ onChanged, name, defaultState }) => {
     const [list, setList] = useState(defaultState);
@@ -64,12 +65,12 @@ const InputListList = ({ onChanged, name, defaultState }) => {
     return(
         <div>
             {list?.map((value, index) => (
-                <div className={inputStyles.section}>
-                    <div>
+                <div>
+                    <div className={inputStyles.header}>
+                        <img src={deleteIcon} alt="remove" className={inputStyles.icon} onClick={() => removeInstruction(index)}/>
                         <input className={inputStyles.text}
                             type="text"
                             name={index}
-                            placeholder="Paste recipe URL here"
                             value={value.title}
                             defaultValue={value.title}
                             onChange={handleTitleChange}
@@ -78,7 +79,6 @@ const InputListList = ({ onChanged, name, defaultState }) => {
                     <InputList name={index} 
                             defaultState={value.list}
                             onChanged={handleListChange} />
-                    <button className={inputStyles.button} onClick={() => removeInstruction(index)}>Remove</button>
                 </div>
                 ))}
                 <button className={inputStyles.button} onClick={addInstruction}>Add</button>

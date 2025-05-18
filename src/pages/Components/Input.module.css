@@ -2,33 +2,43 @@
 @value backgroundColor, darkestColor, mainColor, lightdarkColor, lightColor  from colors;
 
 input {
-    padding: 1rem;
-    font-size: 1rem;
+    padding: 0.5rem;
     border:none;
     border-radius: 10px;
-    box-shadow: inset 1px 1px 3px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 1px 1px 1px 1px rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0);
+    color: inherit;
+    font-size: inherit;
 }
 
 textarea {
+    color: inherit;
+    font-size: inherit;
     resize: none;
-    padding: 1rem;
-    font-size: 1rem;
+    padding: 0.5rem;
     border:none;
     border-radius: 10px;
-    box-shadow: inset 1px 1px 3px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 1px 1px 1px 1px rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0);
+    field-sizing: content;
+    width: 100%;
 }
 
 .text {
     font-size: 1.2rem;
     font-weight: 700;
     text-align: start;
-    margin-bottom: 1rem;
+}
+
+.icon
+{
+    width: 2em;
+    height: 2em;
 }
 
 .textarea {
     font-size: 1.1rem;
-    width: 100%;
-    height: 5rem;
+    height: max-content;
     margin: 0 auto;
 }
 
@@ -37,12 +47,24 @@ textarea {
     padding: 0.5rem;
     font-size: 1rem;
     border-radius: 10px;
-    margin-left: 1rem;
 }
 
 .section {
-    padding: 1rem;
+    padding: 0.5rem;
     border-radius: 10px;
-    margin-bottom: 1rem;
     border-color: rgba(0, 0, 0, 0.1);
+}
+
+.header
+{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+li.section
+{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
 }
