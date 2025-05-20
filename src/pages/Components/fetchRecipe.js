@@ -29,7 +29,7 @@ async function extractRecipeStreetKitchen(url) {
         {
             for (const node of ingredientContainer.children) {
                 var dd = node.querySelector("dd");
-                if (node.tagName == "H3") {
+                if (node.tagName === "H3") {
                     if (currentSection.list.length > 0) {
                         ingredientSections.push(currentSection);
                     }
