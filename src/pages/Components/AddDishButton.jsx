@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { uploadNewData } from '../../dynamoService.js';
 import fetchRecipe from './fetchRecipe.js'; // Make sure this is correctly implemented
 
 const AddDishButton = ({ onClickedAndChanged }) => {
@@ -17,10 +16,8 @@ const AddDishButton = ({ onClickedAndChanged }) => {
         return;
       }
 
-      await uploadNewData(recipe);
-
-      onClickedAndChanged();
-      alert('Dish uploaded successfully!');
+      onClickedAndChanged(recipe);
+      alert('Dish processed!');
       setUrl('');
     } catch (error) {
       console.error('Error:', error);
