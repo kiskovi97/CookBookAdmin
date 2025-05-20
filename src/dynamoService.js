@@ -70,7 +70,6 @@ export const uploadData = async (data) => {
     TableName: 'Recepies',
     Item: data,
   };
-
   try {
     await dynamodb.put(params).promise();
     console.log('Recepie uploaded successfully:', data);

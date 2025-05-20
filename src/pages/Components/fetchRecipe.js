@@ -18,10 +18,51 @@ async function extractRecipeStreetKitchen(url) {
         // Extracting recipe title, ingredients, and instructions using class names
         const title = doc.querySelector('.main .entry-title').textContent.trim();
         const details = doc.querySelector('.entry-content .entry-lead').textContent.trim();
-        const ingredients = Array.from(doc.querySelectorAll('.ingredients-main .ingredients-content dd'))
-            .map(ing => ing.textContent.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim());
+        const ingredientSections = [];
+        let currentSection = {
+            title: "Ingredients",
+            list: []
+        };
+
+        const ingredientContainers = doc.querySelectorAll('.ingredients-main .ingredient-group');
+        for(let ingredientContainer of ingredientContainers)
+        {
+            for (const node of ingredientContainer.children) {
+                var dd = node.querySelector("dd");
+                if (node.tagName == "H3") {
+                    if (currentSection.list.length > 0) {
+                        ingredientSections.push(currentSection);
+                    }
+                    currentSection = {
+                        title: node.textContent.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim(),
+                        list: []
+                    };
+                } else if (dd) {
+                    currentSection.list.push(
+                        dd.textContent.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim()
+                    );
+                }
+            }
+            // Push last section if it has ingredients
+            if (currentSection.list.length > 0) {
+                ingredientSections.push(currentSection);
+            }
+            
+            currentSection = {
+                title: "Ingredients",
+                list: []
+            };
+        }
+            // Push last section if it has ingredients
+        if (currentSection.list.length > 0) {
+            ingredientSections.push(currentSection);
+        }
+        
+
         const instructions = Array.from(doc.querySelectorAll('.the-content-div p'))
             .map(step => step.textContent.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim());
+
+            //h3
         const tags = Array.from(doc.querySelectorAll('.tags-list a'))
                 .map(step => step.textContent.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim());
         const imageMeta = doc.querySelector('meta[property="og:image"]');
@@ -30,14 +71,17 @@ async function extractRecipeStreetKitchen(url) {
         // Creating JSON formatted recipe
         const data = {
             title,
-            ingredients: [{
-                title: "Ingredients",
-                list: ingredients
-            }],
+            ingredients: ingredientSections,
             instructions,
             image,
             details,
-            tags
+            tags,
+            sources: [
+                {
+                    name: "StreetKitchen",
+                    link: url
+                }
+            ]
         };
 
         console.log(JSON.stringify(data, null, 2));
