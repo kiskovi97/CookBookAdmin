@@ -21,6 +21,7 @@ function BigDBReceipt({ proj }) {
     }, [proj])
 
     var image = proj.image?.startsWith("/CookBook") ? "https://kiskovi97.github.io" + proj.image : proj.image; 
+    image = image?.replace("static/media", "images");
 
         return (
             <div className={styles.receipt}>
