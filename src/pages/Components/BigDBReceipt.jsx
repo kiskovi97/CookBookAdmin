@@ -73,7 +73,6 @@ function BigDBReceipt({ proj }) {
                     <ScrollAnimation animateIn="fadeInRight" animateOut="fadeOutRight" animateOnce >
                         <div>
                             <h4>Instructions</h4>
-                            {proj.comment ? (<li>{proj.comment}</li>) : null}
                             <InputList name="instructions" onChanged={handleChange} defaultState={proj.instructions}/>
                         </div>
                     </ScrollAnimation>
