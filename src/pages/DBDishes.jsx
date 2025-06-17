@@ -16,7 +16,7 @@ var DBDishes = () =>
         const result = await fetchData();
         if (result.success) {
             console.log(result.data);
-            setDBData(result.data);
+            setDBData([...result.data.sort((first, second) => second.CreationDate.localeCompare(first.CreationDate))]);
         } else {
             alert("Error Fetching Data: " + result.message);
         }

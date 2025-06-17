@@ -1,12 +1,5 @@
-@value colors: "../colors.css";
-@value backgroundColor, darkestColor, mainColor, lightdarkColor, lightColor  from colors;
-
 .Me  {
-    background-color: mainColor;
-    background: linear-gradient(-90deg, mainColor 0%, darkestColor 100%);
-    color: white;
-    border-bottom-left-radius: 1em;
-    border-bottom-right-radius: 1em;
+    border-radius: 1em;
 }
 
 .person {
@@ -33,14 +26,12 @@
 .title {
     font-size: 7em;
     font-weight: bold;
-    color: primarydark;
-    filter: drop-shadow(4px 5px 10px rgba(34, 34, 34, 0.877));
     line-height: 1em;
     margin-bottom: 0.5em;
 }
 
 .titleBlock {
-    height: 30em;
+    height: 20em;
     width: 30em;
 }
 
@@ -67,7 +58,7 @@ div.description .names {
     }
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 60em) {
     .person {
         height: 0;
         width: 0;

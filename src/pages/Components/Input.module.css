@@ -1,12 +1,9 @@
-@value colors: "../colors.css";
-@value backgroundColor, darkestColor, mainColor, lightdarkColor, lightColor  from colors;
-
 input {
     padding: 0.5rem;
     border:none;
     border-radius: 10px;
     box-shadow: inset 1px 1px 1px 1px rgba(0, 0, 0, 0.05);
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgb(255, 255, 255);
     color: inherit;
     font-size: inherit;
 }
@@ -19,7 +16,7 @@ textarea {
     border:none;
     border-radius: 10px;
     box-shadow: inset 1px 1px 1px 1px rgba(0, 0, 0, 0.05);
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgb(255, 255, 255);
     field-sizing: content;
     width: 100%;
 }

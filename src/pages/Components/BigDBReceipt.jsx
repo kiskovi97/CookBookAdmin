@@ -27,6 +27,7 @@ function BigDBReceipt({ proj }) {
             <div className={styles.receipt}>
                 <div className={styles.main}>
                     <div className={styles.details}>
+                    
                         <div className={styles.title}>
                             <input className={inputStyles.text}
                                 type="text"
@@ -56,6 +57,14 @@ function BigDBReceipt({ proj }) {
                     <div className={styles.image}>
                         <img src={image} hidden={!image} alt="" className={styles.background} />
                     </div>
+                    <div>
+                        <ScrollAnimation animateIn="fadeInRight" animateOut="fadeOutRight" animateOnce >
+                            <div>
+                                <h3>Tags</h3>
+                                <InputList name="tags" onChanged={handleChange} defaultState={proj.tags}/>
+                            </div>
+                        </ScrollAnimation>
+                    </div>
                 </div>
                 <div className={styles.description}>
                     <ScrollAnimation animateIn="fadeInLeft" animateOut="fadeOutLeft" animateOnce >
@@ -63,15 +72,16 @@ function BigDBReceipt({ proj }) {
                     </ScrollAnimation>
                     <ScrollAnimation animateIn="fadeInRight" animateOut="fadeOutRight" animateOnce >
                         <div>
+                            <h4>Instructions</h4>
                             {proj.comment ? (<li>{proj.comment}</li>) : null}
                             <InputList name="instructions" onChanged={handleChange} defaultState={proj.instructions}/>
                         </div>
                     </ScrollAnimation>
                 </div>
                 <div  className={styles.description}>
-                    <div>
-                        <button className={inputStyles.button} onClick={upload}>Upload</button>
-                    </div>
+                        <div>
+                            <button className={inputStyles.button} onClick={upload}>Upload</button>
+                        </div>
                 </div>
             </div>)
 
