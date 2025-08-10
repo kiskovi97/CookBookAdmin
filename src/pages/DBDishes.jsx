@@ -11,12 +11,19 @@ var DBDishes = () =>
     const [dbData, setDBData] = useState([]);
     const [filtered, setFiltered] = useState([]);
     const [filter, setFilter] = useState("");
+    const [orderBy, setOrderBy] = useState("name");
 
-    const fetchAndSetData = async () => {
+    const fetchAndSetData = async (orderBy) => {
         const result = await fetchData();
         if (result.success) {
             console.log(result.data);
-            setDBData([...result.data.sort((first, second) => second.CreationDate.localeCompare(first.CreationDate))]);
+            if (orderBy === "date") {
+                setDBData([...result.data].sort((first, second) => new Date(first.CreationDate) - new Date(second.CreationDate)));
+            } else if (orderBy === "date-desc") {
+                setDBData([...result.data].sort((first, second) => new Date(second.CreationDate) - new Date(first.CreationDate)));
+            } else {
+                setDBData([...result.data].sort((first, second) => first.title.localeCompare(second.title)));
+            }
         } else {
             alert("Error Fetching Data: " + result.message);
         }
@@ -52,11 +59,8 @@ var DBDishes = () =>
     }
 
     useEffect(() => {
-        if (changed)
-        {
-            fetchAndSetData();
-        }
-    }, [changed]);
+        fetchAndSetData(orderBy);
+    }, [changed, orderBy]);
 
     useEffect(() => {
         setFiltered(dbData.filter((item) => recipeMatchesFilter(filter, item)));
@@ -64,11 +68,25 @@ var DBDishes = () =>
     
     return(<div className={styles.page}>
         <div className={styles.filters}>
-            <input 
-            type="text"
-            placeholder="Search..."
-            value={filter}
-            onChange={(e) => setFilter(e.target.value)} />
+            <div>
+                <input 
+                type="text"
+                id="search"
+                name='search'
+                placeholder="Search..."
+                value={filter}            
+                onChange={(e) => setFilter(e.target.value)} />
+            </div>
+            <div className={styles.sorting}>
+                Order By
+                <select name="orderBy" id="orderBy" onChange={(e) => {
+                    setOrderBy(e.target.value);
+                }}>
+                    <option value="name">Name</option>
+                    <option value="date">Oldest</option>
+                    <option value="date-desc">Newest</option>
+                </select>
+            </div>
         </div>
         <div className={gStyles.grid_big}>
             {filtered.map((item) => (<DBReceipt proj={item} />))}

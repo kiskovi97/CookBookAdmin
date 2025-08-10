@@ -79,6 +79,24 @@ export const uploadData = async (data) => {
   }
 };
 
+export const deleteData = async (data) => {
+  await initAWS();
+
+  const params = {
+    TableName: 'Recepies',
+    Key: {
+      id: data.id,
+    },
+  };
+  try {
+    await dynamodb.delete(params).promise();
+    console.log('Recepie deleted successfully:', data);
+  } catch (error) {
+    console.error('Error deleting dish:', data);
+    throw error;
+  }
+};
+
 export const fetchLastXData = async (count) =>
 {
     await initAWS();

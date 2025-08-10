@@ -1,13 +1,22 @@
 import styles from './Receipt.module.css'
 import inputStyles from './Input.module.css'
 import ScrollAnimation from 'react-animate-on-scroll'
+import deleteIcon from '../../logos/bin.png';
 import { useState, useEffect } from 'react';
-import { uploadData } from '../../dynamoService.js';
+import { uploadData, deleteData } from '../../dynamoService.js';
 import InputList from './InputList.jsx';
 import InputListList from './InputListList.jsx';
+import { useNavigate } from 'react-router';
 
 function BigDBReceipt({ proj }) {
     const [allValues, setAllValues] = useState(proj);
+    const navigate = useNavigate();
+
+    const deleteDish = async () => {
+        await deleteData(allValues);
+        navigate("/");
+    }
+
     const handleChange = (e) => {
         setAllValues({ ...allValues, [e.target.name]: e.target.value });
     }; 
@@ -27,7 +36,7 @@ function BigDBReceipt({ proj }) {
             <div className={styles.receipt}>
                 <div className={styles.main}>
                     <div className={styles.details}>
-                    
+                        <img src={deleteIcon} alt="remove" className={inputStyles.icon} onClick={() => deleteDish()}/>
                         <div className={styles.title}>
                             <input className={inputStyles.text}
                                 type="text"
