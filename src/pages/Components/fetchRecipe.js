@@ -1,93 +1,38 @@
 async function extractRecipe(url) {
     try {
-        console.log(url);
-        if (url.includes("streetkitchen"))
-            return await extractRecipeStreetKitchen(url);
-    } catch {
+        const response = await fetch('https://cookbookparser.onrender.com/parse_recipe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ url })
+        });
 
-    }
-}
-async function extractRecipeStreetKitchen(url) {
-    try {
-        console.log(url);
-        const response = await fetch(url);
-        const html = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-
-        // Extracting recipe title, ingredients, and instructions using class names
-        const title = doc.querySelector('.main .entry-title').textContent.trim();
-        const details = doc.querySelector('.entry-content .entry-lead').textContent.trim();
-        const ingredientSections = [];
-        let currentSection = {
-            title: "Ingredients",
-            list: []
-        };
-
-        const ingredientContainers = doc.querySelectorAll('.ingredients-main .ingredient-group');
-        for(let ingredientContainer of ingredientContainers)
-        {
-            for (const node of ingredientContainer.children) {
-                var dd = node.querySelector("dd");
-                if (node.tagName === "H3") {
-                    if (currentSection.list.length > 0) {
-                        ingredientSections.push(currentSection);
-                    }
-                    currentSection = {
-                        title: node.textContent.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim(),
-                        list: []
-                    };
-                } else if (dd) {
-                    currentSection.list.push(
-                        dd.textContent.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim()
-                    );
-                }
-            }
-            // Push last section if it has ingredients
-            if (currentSection.list.length > 0) {
-                ingredientSections.push(currentSection);
-            }
-            
-            currentSection = {
-                title: "Ingredients",
-                list: []
-            };
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-            // Push last section if it has ingredients
-        if (currentSection.list.length > 0) {
-            ingredientSections.push(currentSection);
-        }
-        
 
-        const instructions = Array.from(doc.querySelectorAll('.the-content-div p'))
-            .map(step => step.textContent.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim());
+        const data = await response.json();
+        console.log('Fetched recipe data:', data);
 
-            //h3
-        const tags = Array.from(doc.querySelectorAll('.tags-list a'))
-                .map(step => step.textContent.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim());
-        const imageMeta = doc.querySelector('meta[property="og:image"]');
-        const image = imageMeta ? imageMeta.getAttribute('content') : null;
-
-        // Creating JSON formatted recipe
-        const data = {
-            title,
-            ingredients: ingredientSections,
-            instructions,
-            image,
-            details,
-            tags,
+        const returnData = {
+            title: data.title || "No title",
+            ingredients: [{ title: "Ingredients", list: data.ingredients || [] }],
+            instructions: data.instructions || [],
+            image: "",
+            tags: [],
             sources: [
                 {
-                    name: "StreetKitchen",
+                    name: "Link",
                     link: url
                 }
             ]
         };
 
-        console.log(JSON.stringify(data, null, 2));
-        return data;
-    } catch {
-
+        return returnData;
+    } catch (error) {
+        console.error('Failed to fetch recipe:', error);
+        return null;
     }
 }
 export default extractRecipe;

@@ -49,6 +49,15 @@ function BigDBReceipt({ proj }) {
                         </div>
                         <div>
                             <textarea className={inputStyles.textarea}
+                                name='image'
+                                placeholder="Paste image URL here"
+                                value={allValues.image}
+                                defaultValue={allValues.image}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div>
+                            <textarea className={inputStyles.textarea}
                                 name='details'
                                 placeholder="Paste recipe URL here"
                                 value={allValues.details}
